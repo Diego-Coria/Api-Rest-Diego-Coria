@@ -1,8 +1,12 @@
+import * as Model from "../models/Product.js";
+
 export const getProducts=(req,res)=>{
     res.json(products);
 }
 
-export const getAllProducts=(req,res)=>{
+export const getAllProducts=async(req,res)=>{
+    const {category}=req.query;
+    const products = awaitModel.getAllProducts();
     if(category){
         const productsFiltered=products.filter((item)=>
         item.category.includes(category));
@@ -11,6 +15,7 @@ export const getAllProducts=(req,res)=>{
     }
     res.json(products);
 };
+
 
 
 export const searchProducts =(req,res)=>{
@@ -29,7 +34,7 @@ export const searchProducts =(req,res)=>{
 
 export const getProductById=(req,res)=>{
     const id=req.params.id;
-    const product =product.find((item)=>item.id == id);
+    const product =Model.getProductById(id);
     if(!product){
         res.status(404).json({error:"No existe producto"});
     }
