@@ -1,4 +1,7 @@
 import express from "express";
+import notFound from "./src/middlewares/not-found";
+
+app.use(notFound);
 
 const app = express()
 
