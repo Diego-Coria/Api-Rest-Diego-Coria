@@ -6,7 +6,9 @@ export const getProducts=(req,res)=>{
 
 export const getAllProducts=async(req,res)=>{
     const {category}=req.query;
-    const products = awaitModel.getAllProducts();
+
+    const products = await Model.getAllProducts();
+
     if(category){
         const productsFiltered=products.filter((item)=>
         item.category.includes(category));
@@ -32,9 +34,9 @@ export const searchProducts =(req,res)=>{
     res.json(productsFiltered);
 }
 
-export const getProductById=(req,res)=>{
+export const getProductById=async(req,res)=>{
     const id=req.params.id;
-    const product =Model.getProductById(id);
+    const product =await Model.getProductById(id);
     if(!product){
         res.status(404).json({error:"No existe producto"});
     }
