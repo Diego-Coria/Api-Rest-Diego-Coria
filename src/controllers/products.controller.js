@@ -42,3 +42,5 @@ export const getProductById=async(req,res)=>{
     }
     res.json(product);
 }
+
+//falta el de fitrar y traer productos por categoria

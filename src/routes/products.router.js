@@ -1,10 +1,13 @@
-import {router} from "express";
+import {Router} from "express";
 
-const router=router();
+const router=Router();
 
 import { getAllProducts,
          searchProducts,
          getProductById,
+         createProduct,
+         updateProduct,
+         deleteProduct,
          getProducts } from "../controllers/products.controller.js";
 
 
