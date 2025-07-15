@@ -16,7 +16,7 @@ app.use(cors());
 
 // Ruta raíz
 app.get("/", (req, res) => {
-  res.json({ message: "Bienvenido a mi Api Rest!" });
+  res.json({ message: "<h1>Bienvenido a mi Api Rest!<h1>" });
 });
 
 // Montar rutas

@@ -1,8 +1,7 @@
 // Importa las funciones necesarias del SDK de Firebase
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-// TODO: Agrega otros SDKs de Firebase si necesitas usar más productos
-// Verifica las librerías disponibles en: https://firebase.google.com/docs/web/setup#available-libraries
+
 
 // Configuración de la aplicación web de Firebase, obtenida desde variables de entorno
 const firebaseConfig = {
