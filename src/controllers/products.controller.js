@@ -20,19 +20,34 @@ export const getAllProducts=async(req,res)=>{
 
 
 
-export const searchProducts =(req,res)=>{
-    const {name}=req.query;
-    if(!name){
-        return res.status(400).json({error:"Se requiere el nombre"});
-
+export const searchProducts = async (req, res) => {
+  try {
+    const { name, category } = req.query;
+    if (!name && !category) {
+      return res.status(400).json({ error: "Se requiere nombre o categoría" });
     }
-    const productsFiltered=products.filter((item)=>
-    item.name.toLocaleUpperCase().includes(name.toLocaleUpperCase()));
-    if(productsFiltered.length==0){
-        return res.status(404).json({error:"no se encontraron productos"});
+    const products = await Model.getAllProducts();
+    let productsFiltered = products;
+    if (name) {
+      productsFiltered = productsFiltered.filter((item) =>
+        item.name && item.name.toLowerCase().includes(name.toLowerCase())
+      );
+    }
+    if (category) {
+      productsFiltered = productsFiltered.filter((item) =>
+        item.category && item.category.toLowerCase().includes(category.toLowerCase())
+      );
+    }
+    if (productsFiltered.length === 0) {
+      return res.status(404).json({ error: "No se encontraron productos" });
     }
     res.json(productsFiltered);
-}
+  } catch (error) {
+    console.error("Error en searchProducts:", error);
+    res.status(500).json({ error: "Error al buscar productos" });
+  }
+};
+
 
 export const getProductById=async(req,res)=>{
     const id=req.params.id;
@@ -43,4 +58,40 @@ export const getProductById=async(req,res)=>{
     res.json(product);
 }
 
-//falta el de fitrar y traer productos por categoria
+
+export const createProduct = async (req, res, next) => {
+  try {
+    const productData = req.body;
+    const newProduct = await Model.createProduct(productData);
+    res.status(201).json(newProduct);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const updateProduct = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const productData = req.body;
+    const updatedProduct = await Model.updateProduct(id, productData);
+    if (!updatedProduct) {
+      return res.status(404).json({ error: "No existe el producto" });
+    }
+    res.json(updatedProduct);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const deleteProduct = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const deleted = await Model.deleteProduct(id);
+    if (!deleted) {
+      return res.status(404).json({ error: "No existe el producto" });
+    }
+    res.status(204).send();
+  } catch (error) {
+    next(error);
+  }
+};

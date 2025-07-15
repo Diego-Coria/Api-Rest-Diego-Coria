@@ -1,4 +1,5 @@
 import {Router} from "express";
+import { authentication } from "../middlewares/authentication.js";
 
 const router=Router();
 
@@ -7,24 +8,33 @@ import { getAllProducts,
          getProductById,
          createProduct,
          updateProduct,
-         deleteProduct,
-         getProducts } from "../controllers/products.controller.js";
+         deleteProduct} from "../controllers/products.controller.js";
 
 
 
 
 
-//obtener listado de productos
-router.get("/products",getProducts);
 
-//Buscar por ID
-router.get("/products/:id",getProductById);
+
+
 
 //Buscar por genero
 router.get("/products",getAllProducts);
 
 //buscar por nombre
 router.get("/products/search",searchProducts);
+
+//Buscar por ID
+router.get("/products/:id",getProductById);
+
+// Crear producto 
+router.post("/products", authentication, createProduct);
+
+// Actualizar producto 
+router.put("/products/:id", authentication, updateProduct);
+
+// Eliminar producto 
+router.delete("/products/:id", authentication, deleteProduct);
 
 
 

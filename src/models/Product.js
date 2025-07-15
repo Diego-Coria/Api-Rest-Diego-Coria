@@ -1,7 +1,7 @@
 
 import {db} from "./firebase.js";
 
-import { collection,getDoc, getDocs,doc } from "firebase/firestore";
+import { collection,getDoc, getDocs,doc,addDoc, updateDoc, deleteDoc} from "firebase/firestore";
 
 const productsCollection =collection(db,"products");
 
@@ -27,3 +27,46 @@ export const getProductById = async (id)=>{
   }
 };
 
+export const createProduct = async (productData) => {
+  try {
+    // Valida los datos del producto (puedes agregar más validaciones según sea necesario)
+    if (!productData.name || !productData.category) {
+      throw new Error("El nombre y la categoría son obligatorios");
+    }
+    const docRef = await addDoc(productsCollection, productData);
+    return { id: docRef.id, ...productData };
+  } catch (error) {
+    console.error("Error al crear el producto:", error);
+    throw error;
+  }
+};
+
+export const updateProduct = async (id, productData) => {
+  try {
+    const productRef = doc(productsCollection, id);
+    const snapshot = await getDoc(productRef);
+    if (!snapshot.exists()) {
+      return null;
+    }
+    await updateDoc(productRef, productData);
+    return { id, ...productData };
+  } catch (error) {
+    console.error(`Error al actualizar el producto con ID ${id}:`, error);
+    throw error;
+  }
+};
+
+export const deleteProduct = async (id) => {
+  try {
+    const productRef = doc(productsCollection, id);
+    const snapshot = await getDoc(productRef);
+    if (!snapshot.exists()) {
+      return false;
+    }
+    await deleteDoc(productRef);
+    return true;
+  } catch (error) {
+    console.error(`Error al eliminar el producto con ID ${id}:`, error);
+    throw error;
+  }
+};
