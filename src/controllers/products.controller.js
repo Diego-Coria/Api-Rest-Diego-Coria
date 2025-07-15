@@ -1,9 +1,12 @@
+// Importa todas las funciones del modelo Product.js
 import * as Model from "../models/Product.js";
 
+// Controlador para obtener productos
 export const getProducts=(req,res)=>{
     res.json(products);
 }
 
+// Controlador para obtener todos los productos, con opción de filtrar por categoría
 export const getAllProducts=async(req,res)=>{
     const {category}=req.query;
 
@@ -19,7 +22,7 @@ export const getAllProducts=async(req,res)=>{
 };
 
 
-
+// Controlador para buscar productos por nombre y/o categoría
 export const searchProducts = async (req, res) => {
   try {
     const { name, category } = req.query;
@@ -48,7 +51,7 @@ export const searchProducts = async (req, res) => {
   }
 };
 
-
+// Controlador para obtener un producto por su ID
 export const getProductById=async(req,res)=>{
     const id=req.params.id;
     const product =await Model.getProductById(id);
@@ -58,7 +61,7 @@ export const getProductById=async(req,res)=>{
     res.json(product);
 }
 
-
+// Controlador para crear un nuevo producto
 export const createProduct = async (req, res, next) => {
   try {
     const productData = req.body;
@@ -69,6 +72,7 @@ export const createProduct = async (req, res, next) => {
   }
 };
 
+// Controlador para actualizar un producto existente
 export const updateProduct = async (req, res, next) => {
   try {
     const id = req.params.id;
@@ -83,6 +87,7 @@ export const updateProduct = async (req, res, next) => {
   }
 };
 
+// Controlador para eliminar un producto
 export const deleteProduct = async (req, res, next) => {
   try {
     const id = req.params.id;

@@ -1,22 +1,19 @@
+// Importa el módulo Router de Express para definir rutas
 import {Router} from "express";
+
+// Importa el middleware de autenticación para proteger rutas
 import { authentication } from "../middlewares/authentication.js";
 
+// Crea una instancia del enrutador de Express
 const router=Router();
 
+// Importa los controladores para las operaciones de productos
 import { getAllProducts,
          searchProducts,
          getProductById,
          createProduct,
          updateProduct,
          deleteProduct} from "../controllers/products.controller.js";
-
-
-
-
-
-
-
-
 
 //Buscar por genero
 router.get("/products",getAllProducts);

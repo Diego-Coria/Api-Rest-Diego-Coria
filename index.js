@@ -1,3 +1,6 @@
+// Importa los módulos necesarios: express para la aplicación, cors para habilitar CORS,
+// notFound para manejar rutas no encontradas, productsRouter y authRouter para las rutas,
+// y dotenv/config para cargar variables de entorno
 import express from "express";
 import cors from "cors";
 import notFound from "./src/middlewares/not-found.js";
@@ -29,5 +32,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: "Algo salió mal en el servidor" });
 });
 
+// Define el puerto desde una variable de entorno o usa 3001 por defecto
 const PORT = process.env.PORT || 3001;
+// Inicia el servidor en el puerto especificado y muestra la URL en la consola
 app.listen(PORT, () => console.log(`http://localhost:${PORT}`));

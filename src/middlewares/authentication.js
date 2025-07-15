@@ -1,6 +1,9 @@
+// Importa la librería jsonwebtoken para manejar la verificación de tokens JWT
 import jwt from "jsonwebtoken";
+// Importa las variables de entorno desde el archivo .env
 import "dotenv/config";
 
+// Obtiene la clave secreta para firmar/verificar tokens desde las variables de entorno
 const secret_key = process.env.JWT_SECRET_KEY;
 
 //middleware para verificar el token en JWT
