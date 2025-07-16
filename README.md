@@ -26,7 +26,7 @@ npm install
 cp .env-example .env
 ```
 
-Luego editar el archivo `.env` con los valores correspondientes para tu entorno, incluyendo las credenciales de Firebase (`FIREBASE_API_KEY`, `FIREBASE_AUTH_DOMAIN`, etc.) y el puerto (`PORT`).
+Luego editar el archivo `.env` con los valores correspondientes para tu entorno, incluyendo las credenciales de Firebase (`FIREBASE_API_KEY`, `FIREBASE_AUTH_DOMAIN`, etc.) y el puerto (`PORT`). (ver archivo .env-example)
 
 4. Ejecutar en modo desarrollo:
 
