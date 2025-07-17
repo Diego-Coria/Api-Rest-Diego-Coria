@@ -199,7 +199,7 @@ npm run dev
 ## Pruebas
 
 1. Usa Postman con la URL base: `http://api-rest-diego-coria.onrender.com`
-2. Obtén un token con **POST** `/api/auth/login`:
+2. Obtén un token con **POST** `/api/login`:
    - Body:
      ```json
      {
