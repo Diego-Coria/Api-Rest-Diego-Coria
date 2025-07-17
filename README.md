@@ -100,7 +100,7 @@ npm run dev
 
 ### Iniciar sesión
 
-- **POST** `/api/auth/login`  
+- **POST** `/api/login`  
 - **Descripción:** Autentica a un usuario y devuelve un token JWT.  
 - **Body (JSON):**
 
